@@ -1,0 +1,162 @@
+---
+openapi: 3.0.0
+info:
+  title: LibAPI
+  description: API développée dans le cadre de mon cours Service Web.
+  version: "1"
+servers:
+- url: http://localhost/LibAPI
+paths:
+  /books:
+    get:
+      tags:
+      - Livres
+      summary: Affiche tous les livres présents.
+      responses:
+        "200":
+          description: Un tableau de livres
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Livres'
+  /book/id/{id}:
+    get:
+      tags:
+      - Livre
+      summary: Affiche un livre selon son id.
+      parameters:
+      - name: id
+        in: path
+        description: Le id du livre à afficher
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Le livre à afficher
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Livre'
+  /book/title/{title}:
+    get:
+      tags:
+      - Livre
+      summary: Affiche un livre selon son titre.
+      parameters:
+      - name: title
+        in: path
+        description: Le titre du livre à afficher
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Le livre à afficher
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Livre'
+  /book/add:
+    post:
+      tags:
+      - Livre
+      summary: Crée un livre.
+      requestBody:
+        description: Les informations du livre à créer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body'
+        required: true
+      responses:
+        "201":
+          description: Le id du livre créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201'
+  /book/modify:
+    put:
+      tags:
+      - Livre
+      summary: Modifie un livre.
+      requestBody:
+        description: Les informations du livre à créer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_1'
+        required: true
+      responses:
+        "201":
+          description: Le id du livre modifié
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201'
+components:
+  schemas:
+    Livre:
+      type: object
+      properties:
+        titre:
+          type: string
+        auteur:
+          type: string
+        genre:
+          type: string
+      example:
+        titre: Voyage au centre de la Terre
+        auteur: Jules Vernes
+        genre: Fiction
+    Livres:
+      type: array
+      items:
+        $ref: '#/components/schemas/Livres'
+    body:
+      type: object
+      properties:
+        genres_id:
+          type: integer
+        titre:
+          type: string
+        isbn:
+          type: string
+        auteurs_id:
+          type: integer
+      example:
+        genres_id: 1
+        titre: Titre Livre
+        isbn: "55656565656"
+        auteurs_id: 1
+    inline_response_201:
+      type: object
+      properties:
+        book_id:
+          type: integer
+      example:
+        book_id: 1
+    body_1:
+      type: object
+      properties:
+        livres_id:
+          type: integer
+        genres_id:
+          type: integer
+        titre:
+          type: string
+        isbn:
+          type: string
+        auteurs_id:
+          type: integer
+      example:
+        livres_id: 10
+        genres_id: 1
+        titre: Titre Livre
+        isbn: "55656565656"
+        auteurs_id: 1

@@ -30,7 +30,7 @@ class ShowABookTitleRepository
         $sql = "SELECT livres.titre, CONCAT(auteurs.prenom, ' ', auteurs.nom) AS auteur, genres.nom FROM livres
 INNER JOIN livre_auteur ON livres.id = livre_auteur.livres_id
 INNER JOIN auteurs ON livre_auteur.auteurs_id = auteurs.id
-INNER JOIN genres ON genres.id = livres.genres_id WHERE livres.titre = :titre ;";
+INNER JOIN genres ON genres.id = livres.genres_id WHERE livres.titre LIKE :titre ;";
 
 
         $query = $this->connection->prepare($sql);

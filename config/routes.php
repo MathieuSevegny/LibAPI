@@ -13,7 +13,13 @@ return function (App $app) {
 
     $app->get('/books/title/{title}', \App\Action\ShowABookTitleAction::class)->setName('aBook');
 
+    $app->post('/book/add', \App\Action\BookCreateAction::class);
+
+    $app->put('/book/modify', \App\Action\BookModifyAction::class);
+
     $app->post('/users', \App\Action\UserCreateAction::class);
+
+    $app->get('/docs/v1', \App\Action\Docs\SwaggerUiAction::class);
 
 };
 
