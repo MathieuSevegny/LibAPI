@@ -27,7 +27,7 @@ class ShowABookRepository
     public function showABook($id) : array
     {
 
-        $sql = "SELECT livres.titre, CONCAT(auteurs.prenom, ' ', auteurs.nom) AS auteur, genres.nom FROM livres
+        $sql = "SELECT livres.titre, CONCAT(auteurs.prenom, ' ', auteurs.nom) AS auteur, genres.nom AS genre FROM livres
 INNER JOIN livre_auteur ON livres.id = livre_auteur.livres_id
 INNER JOIN auteurs ON livre_auteur.auteurs_id = auteurs.id
 INNER JOIN genres ON genres.id = livres.genres_id WHERE livres.id = " . $id .";";
