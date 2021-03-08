@@ -29,6 +29,6 @@ final class ShowABookTitleAction
 
         return $response
             ->withHeader('Content-Type', 'application/json')
-            ->withStatus(201);
+            ->withStatus(200);
     }
 }

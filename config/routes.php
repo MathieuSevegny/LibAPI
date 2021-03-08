@@ -2,6 +2,7 @@
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use App\Midleware\BeforeEditingMidd;
 use Slim\App;
 
 return function (App $app) {
@@ -10,6 +11,8 @@ return function (App $app) {
     $app->get('/books', \App\Action\ShowBooksAction::class)->setName('allBooks');
 
     $app->get('/book/id/{id}', \App\Action\ShowABookAction::class)->setName('aBook');
+
+    $app->delete('/book/id/{id}', \App\Action\DeleteABookAction::class)->setName('aBook');
 
     $app->get('/books/title/{title}', \App\Action\ShowABookTitleAction::class)->setName('aBook');
 

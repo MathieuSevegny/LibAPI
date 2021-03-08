@@ -7,6 +7,7 @@ use Slim\Views\TwigMiddleware;
 
 
 return function (App $app) {
+    $app->add(\App\Midleware\BeforeEditingMidd::class);
     // Parse json, form data and xml
     $app->addBodyParsingMiddleware();
 

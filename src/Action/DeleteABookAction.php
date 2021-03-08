@@ -2,17 +2,17 @@
 
 namespace App\Action;
 
-use App\Domain\Books\Service\ShowABook;
+use App\Domain\Books\Service\DeleteABook;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class ShowABookAction
+final class DeleteABookAction
 {
-    private $showBook;
+    private $deleteBook;
 
-    public function __construct(ShowABook $showBook)
+    public function __construct(DeleteABook $deleteBook)
     {
-        $this->showBook = $showBook;
+        $this->deleteBook = $deleteBook;
     }
 
     public function __invoke(
@@ -22,7 +22,7 @@ final class ShowABookAction
 
         $bookId = $request->getAttribute('id',1);
         // Invoke the Domain with inputs and retain the result
-        $result = $this->showBook->showingBook($bookId);
+        $result = $this->deleteBook->deleteABook($bookId);
 
 
         // Build the HTTP response
